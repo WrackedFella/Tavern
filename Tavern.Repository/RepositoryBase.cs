@@ -9,7 +9,7 @@ using Shared;
 
 namespace Tavern.Repository
 {
-	public class RepositoryBase<TEntity, TModel> : IDisposable
+	public class RepositoryBase<TEntity, TModel> : IRepository<TModel>
 		where TEntity : EntityBase
 		where TModel : IPredicateBuilder<TEntity>
 	{
@@ -69,11 +69,6 @@ namespace Tavern.Repository
 			this.Context.Set<TEntity>().Remove(entity);
 			this.Context.Remove(entity);
 			await this.Context.SaveChangesAsync();
-		}
-
-		public void Dispose()
-		{
-			this.Context?.Dispose();
 		}
 	}
 }

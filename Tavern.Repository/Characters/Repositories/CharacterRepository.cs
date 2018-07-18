@@ -1,11 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Tavern.Domain.Characters;
 using Tavern.Repository.Characters.Models;
 
 namespace Tavern.Repository.Characters.Repositories
 {
-	public class CharacterRepository : RepositoryBase<Character, CharacterModel>
+	public class CharacterRepository : RepositoryBase<Character, CharacterModel>, IDisposable
 	{
 		public CharacterRepository(DbContext context) : base(context)
 		{
@@ -15,5 +16,10 @@ namespace Tavern.Repository.Characters.Repositories
 				x.CreateMap<CharacterModel, Character>();
 			});
 		}
+
+	    public void Dispose()
+	    {
+	        Mapper.Reset();
+	    }
 	}
 }

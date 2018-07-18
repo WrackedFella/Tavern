@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Tavern.Domain;
 using Tavern.Domain.Characters;
@@ -37,5 +38,30 @@ namespace Tavern.Repository.UnitTests.Characters
 			Assert.Equal(testResult.Name, testCase.Expected.Name);
 			Assert.Equal(testResult.Description, testCase.Expected.Description);
 		}
-	}
+
+	    [Fact]
+	    public async Task Insert_GivenNewCharacter_ReturnsCharacter()
+	    {
+	        var context = this.BuildContext();
+	        var repo = new CharacterRepository(context);
+
+	        var result = await repo.Insert(new CharacterModel());
+
+	        Assert.NotNull(result);
+	        Assert.Single(result);
+	    }
+
+	    [Fact]
+	    public async Task Update_GivenNewName_ReturnsCharacterWithNewName()
+	    {
+	        var newName = "John";
+	        var context = this.BuildContext(new Character { Name = newName });
+	        var repo = new CharacterRepository(context);
+
+	        var result = await repo.Update(new CharacterModel { Name = newName});
+
+	        Assert.NotNull(result);
+	        Assert.Equal(newName, result.Name);
+	    }
+    }
 }
