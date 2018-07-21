@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Tavern.Domain;
 using Tavern.Domain.Characters;
-using Tavern.Repository.Characters.Models;
-using Tavern.Repository.Characters.Repositories;
+using Tavern.Repository.Characters;
 using UnitTests.Core;
 using Xunit;
 

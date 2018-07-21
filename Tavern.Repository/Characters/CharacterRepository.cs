@@ -2,14 +2,10 @@
 using System.Linq.Expressions;
 using AutoMapper;
 using LinqKit;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Tavern.Domain;
 using Tavern.Domain.Characters;
-using Tavern.Repository.Characters.Models;
-using Tavern.Repository.Characters.Profiles;
 
-namespace Tavern.Repository.Characters.Repositories
+namespace Tavern.Repository.Characters
 {
 	public class CharacterRepository : RepositoryBase<Character, CharacterModel>, IDisposable
 	{
@@ -19,7 +15,8 @@ namespace Tavern.Repository.Characters.Repositories
 		{
 			this._context = context;
 			Mapper.Initialize(x => {
-				x.CreateMap<Character, CharacterModel>();
+				x.CreateMap<Character, CharacterModel>()
+					.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CharacterId));
 				x.CreateMap<CharacterModel, Character>();
 			});
 		}

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Tavern.Domain.Characters;
-using Tavern.Repository.Characters.Models;
+using Tavern.Repository.Characters;
 using UnitTests.Core;
 
 namespace Tavern.Repository.UnitTests.Characters

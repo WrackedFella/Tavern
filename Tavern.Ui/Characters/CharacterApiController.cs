@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Tavern.Repository.Characters.Models;
+using Tavern.Repository.Characters;
 using Tavern.Services;
 using Tavern.Ui.Core;
 

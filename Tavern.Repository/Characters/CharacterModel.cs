@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Shared;
 using Tavern.Domain.Characters;
 
-namespace Tavern.Repository.Characters.Models
+namespace Tavern.Repository.Characters
 {
 	public class CharacterModel : ModelBase, IEquatable<Character>
 	{
