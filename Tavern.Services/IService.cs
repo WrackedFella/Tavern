@@ -6,16 +6,16 @@ namespace Tavern.Services
 {
     public interface IService<TModel>
     {
-        Task<TModel> Get(Guid id);
+		Task<IEnumerable<TModel>> Get();
 
-        Task<IEnumerable<TModel>> List();
+		Task<TModel> Get(Guid id);
 
         Task<IEnumerable<TModel>> Search(TModel model);
 
-        Task<TModel> Update(TModel model);
+        Task<TModel> Update(Guid id, TModel model);
 
         Task<IEnumerable<TModel>> Insert(params TModel[] models);
 
-        Task Delete(int id);
+        Task Delete(Guid id);
     }
 }

@@ -12,10 +12,10 @@ namespace Tavern.Repository
 
         Task<IEnumerable<TModel>> Search(TModel model);
 
-        Task<TModel> Update(TModel model);
+        Task<TModel> Update(Guid id, TModel model);
 
         Task<IEnumerable<TModel>> Insert(params TModel[] models);
 
-        Task Delete(int id);
+        Task Delete(Guid id);
     }
 }

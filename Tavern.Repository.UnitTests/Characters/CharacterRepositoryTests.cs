@@ -23,7 +23,7 @@ namespace Tavern.Repository.UnitTests.Characters
 			context.SaveChanges();
 			return context;
 		}
-		
+
 		[Theory]
 		[ClassData(typeof(CharacterTestData))]
 		public async Task TestProfileMapping(TestCase<CharacterModel> testCase)
@@ -42,31 +42,32 @@ namespace Tavern.Repository.UnitTests.Characters
 			}
 		}
 
-	    [Fact]
-	    public async Task Insert_GivenNewCharacter_ReturnsCharacter()
-	    {
-	        var context = this.BuildContext();
-		    using (var repo = new CharacterRepository(context))
-		    {
+		[Fact]
+		public async Task Insert_GivenNewCharacter_ReturnsCharacter()
+		{
+			var context = this.BuildContext();
+			using (var repo = new CharacterRepository(context))
+			{
 				var result = await repo.Insert(new CharacterModel());
 
-			    Assert.NotNull(result);
-			    Assert.Single(result);
+				Assert.NotNull(result);
+				Assert.Single(result);
 			}
 		}
 
-	    [Fact]
-	    public async Task Update_GivenNewName_ReturnsCharacterWithNewName()
-	    {
-	        var newName = "John";
-	        var context = this.BuildContext(new Character { Name = newName });
-		    using (var repo = new CharacterRepository(context))
+		[Fact]
+		public async Task Update_GivenNewName_ReturnsCharacterWithNewName()
+		{
+			const string newName = "John";
+			var context = this.BuildContext(new Character { Name = newName });
+			var id = context.Characters.First().CharacterId;
+			using (var repo = new CharacterRepository(context))
 			{
-				var result = await repo.Update(new CharacterModel {Name = newName});
+				var result = await repo.Update(id, new CharacterModel { Name = newName });
 
 				Assert.NotNull(result);
 				Assert.Equal(newName, result.Name);
 			}
 		}
-    }
+	}
 }

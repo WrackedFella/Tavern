@@ -5,27 +5,23 @@ using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Tavern.Domain.Characters;
 using Tavern.Repository.Characters.Models;
+using Tavern.Repository.Characters.Profiles;
 
 namespace Tavern.Repository.Characters.Repositories
 {
-	public class CharacterRepository : RepositoryBase<Character, CharacterModel, string>, IDisposable
+	public class CharacterRepository : RepositoryBase<Character, CharacterModel>, IDisposable
 	{
 		private readonly DbContext _context;
 
 		public CharacterRepository(DbContext context) : base(context)
 		{
 			this._context = context;
-			BuildMapping();
-		}
-
-		private static void BuildMapping()
-		{
-			Mapper.Initialize(x =>
-			{
+			Mapper.Initialize(x => {
 				x.CreateMap<Character, CharacterModel>();
 				x.CreateMap<CharacterModel, Character>();
 			});
 		}
+		
 
 		public void Dispose()
 		{

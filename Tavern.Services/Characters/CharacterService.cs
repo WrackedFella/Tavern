@@ -8,42 +8,72 @@ using Tavern.Repository.Characters.Repositories;
 namespace Tavern.Services.Characters
 {
 	public class CharacterService : IService<CharacterModel>
-    {
-		private readonly CharacterRepository _repo;
+	{
+		private readonly DbContext _context;
 
 		public CharacterService(DbContext context)
 		{
-			this._repo = new CharacterRepository(context);
+			this._context = context;
 		}
-        
-        public async Task<CharacterModel> Get(Guid id)
-        {
-            return await this._repo.Get(id);
-        }
 
-        public async Task<IEnumerable<CharacterModel>> List()
-        {
-            return await this._repo.List();
-        }
+		public async Task<IEnumerable<CharacterModel>> Get()
+		{
+			IEnumerable<CharacterModel> result;
+			using (var repo = new CharacterRepository(this._context))
+			{
+				result = await repo.List();
+			}
+			return result;
+		}
 
-        public async Task<IEnumerable<CharacterModel>> Search(CharacterModel model)
-        {
-            return await this._repo.Search(model);
-        }
+		public async Task<CharacterModel> Get(Guid id)
+		{
+			CharacterModel result;
+			using (var repo = new CharacterRepository(this._context))
+			{
+				result = await repo.Get(id);
+			}
+			return result;
+		}
 
-        public async Task<CharacterModel> Update(CharacterModel model)
-        {
-            return await this._repo.Update(model);
-        }
+		public async Task<IEnumerable<CharacterModel>> Search(CharacterModel model)
+		{
+			IEnumerable<CharacterModel> result;
+			using (var repo = new CharacterRepository(this._context))
+			{
+				result = await repo.Search(model);
+			}
+			return result;
+		}
 
-        public async Task<IEnumerable<CharacterModel>> Insert(params CharacterModel[] models)
-        {
-            return await this._repo.Insert(models);
-        }
+		public async Task<CharacterModel> Update(Guid id, CharacterModel model)
+		{
+			CharacterModel result;
+			using (var repo = new CharacterRepository(this._context))
+			{
+				result = await repo.Update(id, model);
+			}
 
-        public async Task Delete(int id)
-        {
-            await this._repo.Delete(id);
-        }
-    }
+			return result;
+		}
+
+		public async Task<IEnumerable<CharacterModel>> Insert(params CharacterModel[] models)
+		{
+			IEnumerable<CharacterModel> result;
+			using (var repo = new CharacterRepository(this._context))
+			{
+				result = await repo.Insert(models);
+			}
+
+			return result;
+		}
+
+		public async Task Delete(Guid id)
+		{
+			using (var repo = new CharacterRepository(this._context))
+			{
+				await repo.Delete(id);
+			}
+		}
+	}
 }

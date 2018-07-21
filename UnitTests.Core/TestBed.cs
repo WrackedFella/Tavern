@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tavern.Domain;
-using Xunit;
 
 namespace UnitTests.Core
 {

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Shared
 {
-	public abstract class ModelBase<T>
+	public abstract class ModelBase
 	{
-		protected virtual T Id { get; set; }
+		/// <summary>
+		/// The Model's unique identifier. Not necessarily the Entitie's. 
+		/// </summary>
+		public virtual Guid Id { get; set; }
 	}
 }

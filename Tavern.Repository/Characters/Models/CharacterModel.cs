@@ -6,7 +6,7 @@ using Tavern.Domain.Characters;
 
 namespace Tavern.Repository.Characters.Models
 {
-	public class CharacterModel : ModelBase<string>, IEquatable<Character>
+	public class CharacterModel : ModelBase, IEquatable<Character>
 	{
 		[Required, MinLength(2), MaxLength(100)]
 		public string Name { get; set; }

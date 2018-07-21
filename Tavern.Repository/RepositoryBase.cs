@@ -10,9 +10,9 @@ using Shared;
 
 namespace Tavern.Repository
 {
-	public abstract class RepositoryBase<TEntity, TModel, TKey> : IRepository<TModel>
+	public abstract class RepositoryBase<TEntity, TModel> : IRepository<TModel>
 		where TEntity : EntityBase
-		where TModel : ModelBase<TKey>, IEquatable<TEntity>
+		where TModel : ModelBase, IEquatable<TEntity>
 	{
 		protected readonly DbContext Context;
 
@@ -20,16 +20,18 @@ namespace Tavern.Repository
 		{
 			this.Context = context;
 		}
-
+		
 		public virtual async Task<TModel> Get(Guid id)
 		{
 			var entity = await this.Context.Set<TEntity>().FindAsync(id);
-			return Mapper.Map<TModel>(entity);
+			return entity == null ? null : Mapper.Map<TModel>(entity);
 		}
 
 		public virtual async Task<IEnumerable<TModel>> List()
 		{
+			// ToDo | Task | Paging
 			return await this.Context.Set<TEntity>()
+				.Take(1000)
 				.ProjectTo<TModel>()
 				.ToListAsync();
 		}
@@ -44,10 +46,9 @@ namespace Tavern.Repository
 			return results;
 		}
 
-		public virtual async Task<TModel> Update(TModel model)
+		public virtual async Task<TModel> Update(Guid id, TModel model)
 		{
-			var entity = await this.Context.Set<TEntity>()
-				.SingleAsync(x => model.Equals(x));
+			var entity = await this.Context.Set<TEntity>().FindAsync(id);
 			if (entity == null)
 			{
 				throw new NullReferenceException();
@@ -66,7 +67,7 @@ namespace Tavern.Repository
 			return entities.Select(Mapper.Map<TModel>);
 		}
 
-		public virtual async Task Delete(int id)
+		public virtual async Task Delete(Guid id)
 		{
 			var entity = await this.Context.Set<TEntity>().FindAsync(id);
 			this.Context.Set<TEntity>().Remove(entity);
