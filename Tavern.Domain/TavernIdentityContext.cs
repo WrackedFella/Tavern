@@ -23,12 +23,17 @@ namespace Tavern.Domain
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Tavern_Dev;Integrated Security=True");
+				optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Tavern_Development;Integrated Security=True");
 			}
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<Character>(x => {
+				x.Property(b => b.CharacterId).HasDefaultValueSql("NEWID()");
+				x.Property(b => b.CreatedDate).HasDefaultValueSql("GETDATE()");
+			});
+			
 			base.OnModelCreating(modelBuilder);
 		}
 	}

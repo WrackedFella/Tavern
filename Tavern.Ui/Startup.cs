@@ -18,6 +18,9 @@ using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using Tavern.Domain;
 using Tavern.Domain.Auth;
+using Tavern.Repository.Characters.Models;
+using Tavern.Services;
+using Tavern.Services.Characters;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui
@@ -40,6 +43,7 @@ namespace Tavern.Ui
         {
             services.AddSingleton(this.Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+	        services.AddSingleton<IService<CharacterModel>, CharacterService>();
 
             ConfigureContexts(services);
             ConfigureAuth(services);

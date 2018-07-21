@@ -10,7 +10,7 @@ using Tavern.Domain;
 namespace Tavern.Domain.Migrations
 {
     [DbContext(typeof(TavernIdentityContext))]
-    [Migration("20180717005439_InitialCreate")]
+    [Migration("20180721191439_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,27 +179,30 @@ namespace Tavern.Domain.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Tavern.Domain.Character.Character", b =>
+            modelBuilder.Entity("Tavern.Domain.Characters.Character", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("CharacterId")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
 
                     b.Property<string>("ModifiedBy");
 
-                    b.Property<DateTimeOffset>("ModifiedDate");
+                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.HasKey("Id");
+                    b.HasKey("CharacterId");
 
                     b.ToTable("Characters");
                 });

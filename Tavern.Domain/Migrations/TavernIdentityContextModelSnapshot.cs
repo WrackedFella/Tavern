@@ -3,6 +3,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Tavern.Domain;
 
 namespace Tavern.Domain.Migrations
 {
@@ -175,27 +177,30 @@ namespace Tavern.Domain.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Tavern.Domain.Character.Character", b =>
+            modelBuilder.Entity("Tavern.Domain.Characters.Character", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("CharacterId")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
 
                     b.Property<string>("ModifiedBy");
 
-                    b.Property<DateTimeOffset>("ModifiedDate");
+                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.HasKey("Id");
+                    b.HasKey("CharacterId");
 
                     b.ToTable("Characters");
                 });
