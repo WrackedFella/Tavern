@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+using Tavern.Domain;
 
 namespace Tavern.Repository
 {
@@ -14,9 +16,9 @@ namespace Tavern.Repository
 		where TEntity : EntityBase
 		where TModel : ModelBase, IEquatable<TEntity>
 	{
-		protected readonly DbContext Context;
+		protected readonly TavernIdentityContext Context;
 
-		protected RepositoryBase(DbContext context)
+		protected RepositoryBase(TavernIdentityContext context)
 		{
 			this.Context = context;
 		}

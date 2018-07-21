@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tavern.Domain.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,10 +52,10 @@ namespace Tavern.Domain.Migrations
                 columns: table => new
                 {
                     CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "GETDATE()"),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "getdate()"),
                     ModifiedBy = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTimeOffset>(nullable: true),
-                    CharacterId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    CharacterId = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true)
                 },

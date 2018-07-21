@@ -10,8 +10,8 @@ using Tavern.Domain;
 namespace Tavern.Domain.Migrations
 {
     [DbContext(typeof(TavernIdentityContext))]
-    [Migration("20180721191439_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180721201314_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -183,13 +183,13 @@ namespace Tavern.Domain.Migrations
                 {
                     b.Property<Guid>("CharacterId")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWID()");
+                        .HasComputedColumnSql("newid()");
 
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);

@@ -43,7 +43,7 @@ namespace Tavern.Ui
         {
             services.AddSingleton(this.Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-	        services.AddSingleton<IService<CharacterModel>, CharacterService>();
+			services.AddScoped<IService<CharacterModel>, CharacterService>();
 
             ConfigureContexts(services);
             ConfigureAuth(services);

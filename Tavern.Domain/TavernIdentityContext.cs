@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Tavern.Domain.Auth;
 using Tavern.Domain.Characters;
 
@@ -30,11 +32,23 @@ namespace Tavern.Domain
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Character>(x => {
-				x.Property(b => b.CharacterId).HasDefaultValueSql("NEWID()");
-				x.Property(b => b.CreatedDate).HasDefaultValueSql("GETDATE()");
+				x.Property(b => b.CharacterId)
+					.HasDefaultValueSql("newid()")
+					.HasValueGenerator<GuidValueGenerator>();
+				x.Property(b => b.CreatedDate).HasDefaultValueSql("getdate()");
 			});
 			
 			base.OnModelCreating(modelBuilder);
 		}
+	}
+
+	public class GuidValueGenerator : ValueGenerator<Guid>
+	{
+		public override Guid Next(EntityEntry entry)
+		{
+			return Guid.NewGuid();
+		}
+
+		public override bool GeneratesTemporaryValues => false;
 	}
 }

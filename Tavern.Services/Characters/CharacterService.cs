@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Tavern.Domain;
 using Tavern.Repository.Characters.Models;
 using Tavern.Repository.Characters.Repositories;
 
@@ -9,9 +11,9 @@ namespace Tavern.Services.Characters
 {
 	public class CharacterService : IService<CharacterModel>
 	{
-		private readonly DbContext _context;
+		private readonly TavernIdentityContext _context;
 
-		public CharacterService(DbContext context)
+		public CharacterService(TavernIdentityContext context)
 		{
 			this._context = context;
 		}

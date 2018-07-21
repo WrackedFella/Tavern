@@ -181,13 +181,13 @@ namespace Tavern.Domain.Migrations
                 {
                     b.Property<Guid>("CharacterId")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWID()");
+                        .HasComputedColumnSql("newid()");
 
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
