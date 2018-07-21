@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO.Compression;
-using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +18,6 @@ using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using Tavern.Domain;
 using Tavern.Domain.Auth;
-using Tavern.Ui.Core;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui

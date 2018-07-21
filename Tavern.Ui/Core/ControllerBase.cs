@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Tavern.Ui.Core
 {
@@ -52,7 +48,7 @@ namespace Tavern.Ui.Core
         //    this.Context.Set<TEntity>().Update(record);
         //    await this.Context.SaveChangesAsync();
         //    return AcceptedAtRoute(new { id = record.Id }, model);
-        //}
+        //} 
 
         //[HttpPatch("{id}")]
         //public async Task<ActionResult<AcceptedAtRouteResult>> Patch(Guid id, [FromBody]JsonPatchDocument<TModel> patch)

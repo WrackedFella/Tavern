@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -9,13 +10,13 @@ using Shared;
 
 namespace Tavern.Repository
 {
-	public class RepositoryBase<TEntity, TModel> : IRepository<TModel>
+	public abstract class RepositoryBase<TEntity, TModel, TKey> : IRepository<TModel>
 		where TEntity : EntityBase
-		where TModel : IPredicateBuilder<TEntity>
+		where TModel : ModelBase<TKey>, IEquatable<TEntity>
 	{
 		protected readonly DbContext Context;
 
-		public RepositoryBase(DbContext context)
+		protected RepositoryBase(DbContext context)
 		{
 			this.Context = context;
 		}
@@ -36,7 +37,7 @@ namespace Tavern.Repository
 		public virtual async Task<IEnumerable<TModel>> Search(TModel model)
 		{
 			List<TModel> results = await this.Context.Set<TEntity>()
-				.Where(model.BuildPredicate())
+				.Where(BuildPredicate(model))
 				.ProjectTo<TModel>()
 				.ToListAsync();
 
@@ -45,11 +46,13 @@ namespace Tavern.Repository
 
 		public virtual async Task<TModel> Update(TModel model)
 		{
-			var entity = await this.Context.Set<TEntity>().FirstOrDefaultAsync(model.BuildPredicate());
+			var entity = await this.Context.Set<TEntity>()
+				.SingleAsync(x => model.Equals(x));
 			if (entity == null)
 			{
 				throw new NullReferenceException();
 			}
+
 			Mapper.Map(model, entity);
 			await this.Context.SaveChangesAsync();
 			return Mapper.Map<TModel>(entity);
@@ -57,7 +60,7 @@ namespace Tavern.Repository
 
 		public virtual async Task<IEnumerable<TModel>> Insert(params TModel[] models)
 		{
-			List<TEntity> entities = models.Select(model => Mapper.Map<TEntity>(model)).ToList();
+			List<TEntity> entities = models.Select(Mapper.Map<TEntity>).ToList();
 			await this.Context.AddRangeAsync(entities);
 			await this.Context.SaveChangesAsync();
 			return entities.Select(Mapper.Map<TModel>);
@@ -70,5 +73,8 @@ namespace Tavern.Repository
 			this.Context.Remove(entity);
 			await this.Context.SaveChangesAsync();
 		}
+
+		protected abstract Expression<Func<TEntity, bool>> BuildPredicate(TModel model);
+
 	}
 }
