@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shared
 {
-	public class EntityBase
+	public abstract class EntityBase
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public Guid Id { get; set; }
+		protected Guid Id { get; set; }
 	}
 }

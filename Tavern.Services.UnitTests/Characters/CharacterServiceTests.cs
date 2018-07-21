@@ -24,12 +24,12 @@ namespace Tavern.Services.UnitTests.Characters
 		}
 
 		[Fact]
-		public async Task CreatePurchaseOrder_GivenNewPurchaseOrder_ReturnsInt()
+		public async Task CreateCharacter_GivenNewCharacter_ReturnsCharacter()
 		{
 			var context = this.BuildContext();
 			var service = new CharacterService(context);
 
-			var result = await service.CreateCharacters(new CharacterModel());
+			var result = await service.Insert(new CharacterModel());
 
 			Assert.NotNull(result);
 		}
