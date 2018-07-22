@@ -22,6 +22,7 @@ using Tavern.Domain;
 using Tavern.Repository.Characters;
 using Tavern.Services;
 using Tavern.Services.Characters;
+using Tavern.Ui.Core;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui
@@ -139,7 +140,10 @@ namespace Tavern.Ui
 
             services
                 .AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
-				.AddJsonOptions(options => options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ");
+				.AddJsonOptions(options => {
+		            options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
+		            options.SerializerSettings.ContractResolver = new RenderDataContractResolver();
+	            });
         }
 
         private static void ConfigureLogging(IServiceCollection services)
