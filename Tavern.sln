@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Services", "Tavern.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Services.UnitTests", "Tavern.Services.UnitTests\Tavern.Services.UnitTests.csproj", "{F71441A0-C928-4B26-BD57-2D7F9D3CF12E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavern.Ui", "Tavern.Ui\Tavern.Ui.csproj", "{8B1FE82E-B520-4646-BF58-3C39E3E72F03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Ui", "Tavern.Ui\Tavern.Ui.csproj", "{8B1FE82E-B520-4646-BF58-3C39E3E72F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavern.Auth", "Tavern.Auth\Tavern.Auth.csproj", "{DBA50F83-D830-4405-86D1-AC963BD74558}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{8B1FE82E-B520-4646-BF58-3C39E3E72F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1FE82E-B520-4646-BF58-3C39E3E72F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1FE82E-B520-4646-BF58-3C39E3E72F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA50F83-D830-4405-86D1-AC963BD74558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA50F83-D830-4405-86D1-AC963BD74558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA50F83-D830-4405-86D1-AC963BD74558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA50F83-D830-4405-86D1-AC963BD74558}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

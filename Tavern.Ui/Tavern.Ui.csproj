@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tavern.Auth\Tavern.Auth.csproj" />
     <ProjectReference Include="..\Tavern.Domain\Tavern.Domain.csproj" />
     <ProjectReference Include="..\Tavern.Services\Tavern.Services.csproj" />
   </ItemGroup>

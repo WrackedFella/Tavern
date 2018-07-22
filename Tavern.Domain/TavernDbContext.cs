@@ -3,18 +3,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
-using Tavern.Domain.Auth;
 using Tavern.Domain.Characters;
 
 namespace Tavern.Domain
 {
-	public class TavernIdentityContext : IdentityDbContext<TavernUser, TavernRole, Guid>
+	public class TavernDbContext : DbContext
 	{
-		public TavernIdentityContext()
+		public TavernDbContext()
 		{
 		}
 
-		public TavernIdentityContext(DbContextOptions<TavernIdentityContext> options)
+		public TavernDbContext(DbContextOptions options)
 			: base(options)
 		{
 		}
