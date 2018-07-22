@@ -16,8 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
+using Tavern.Auth.IdentityContext;
+using Tavern.Auth.Models;
 using Tavern.Domain;
-using Tavern.Domain.Auth;
 using Tavern.Repository.Characters;
 using Tavern.Services;
 using Tavern.Services.Characters;
@@ -115,7 +116,7 @@ namespace Tavern.Ui
 
         private void ConfigureContexts(IServiceCollection services)
         {
-            services.AddDbContext<TavernIdentityContext>(options =>
+            services.AddDbContext<TavernDbContext>(options =>
             {
                 options.UseSqlServer(this._connStr);
                 options.UseLazyLoadingProxies();
@@ -138,7 +139,7 @@ namespace Tavern.Ui
 
             services
                 .AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
-                .AddJsonOptions(options =>
+				.AddJsonOptions(options =>
                 {
                     options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
                     //options.SerializerSettings.Converters.Add(new CustomJsonConverter());

@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Tavern.Domain;
+using Tavern.Auth.IdentityContext;
 
-namespace Tavern.Domain.Migrations
+namespace Tavern.Auth.Migrations
 {
     [DbContext(typeof(TavernIdentityContext))]
-    [Migration("20180721201314_InitialMigration")]
+    [Migration("20180722004124_Initial-Migration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +104,7 @@ namespace Tavern.Domain.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Tavern.Domain.Auth.TavernRole", b =>
+            modelBuilder.Entity("Tavern.Auth.Models.TavernRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -128,7 +128,7 @@ namespace Tavern.Domain.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Tavern.Domain.Auth.TavernUser", b =>
+            modelBuilder.Entity("Tavern.Auth.Models.TavernUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -179,37 +179,9 @@ namespace Tavern.Domain.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Tavern.Domain.Characters.Character", b =>
-                {
-                    b.Property<Guid>("CharacterId")
-                        .ValueGeneratedOnAdd()
-                        .HasComputedColumnSql("newid()");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("ModifiedBy");
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.HasKey("CharacterId");
-
-                    b.ToTable("Characters");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Tavern.Domain.Auth.TavernRole")
+                    b.HasOne("Tavern.Auth.Models.TavernRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -217,7 +189,7 @@ namespace Tavern.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Tavern.Domain.Auth.TavernUser")
+                    b.HasOne("Tavern.Auth.Models.TavernUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -225,7 +197,7 @@ namespace Tavern.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Tavern.Domain.Auth.TavernUser")
+                    b.HasOne("Tavern.Auth.Models.TavernUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -233,12 +205,12 @@ namespace Tavern.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Tavern.Domain.Auth.TavernRole")
+                    b.HasOne("Tavern.Auth.Models.TavernRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Tavern.Domain.Auth.TavernUser")
+                    b.HasOne("Tavern.Auth.Models.TavernUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -246,7 +218,7 @@ namespace Tavern.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Tavern.Domain.Auth.TavernUser")
+                    b.HasOne("Tavern.Auth.Models.TavernUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

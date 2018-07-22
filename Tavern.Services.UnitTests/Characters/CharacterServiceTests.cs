@@ -10,7 +10,7 @@ namespace Tavern.Services.UnitTests.Characters
 {
 	public class CharacterServiceTests : TestBed
 	{
-		public TavernIdentityContext BuildContext(params Character[] characters)
+		public TavernDbContext BuildContext(params Character[] characters)
 		{
 			var context = GenerateContext();
 			if (characters.Length == 0)
@@ -26,7 +26,7 @@ namespace Tavern.Services.UnitTests.Characters
 		[Fact]
 		public async Task CreateCharacter_GivenNewCharacter_ReturnsCharacter()
 		{
-			var context = this.BuildContext();
+			var context = BuildContext();
 			var service = new CharacterService(context);
 
 			var result = await service.Insert(new CharacterModel());

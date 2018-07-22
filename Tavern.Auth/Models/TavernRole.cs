@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace Tavern.Domain.Auth
+namespace Tavern.Auth.Models
 {
 	public class TavernRole : IdentityRole<Guid>
 	{

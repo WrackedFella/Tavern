@@ -10,7 +10,7 @@ namespace Tavern.Repository.UnitTests.Characters
 {
 	public class CharacterRepositoryTests : TestBed
 	{
-		public TavernIdentityContext BuildContext(params Character[] characters)
+		public TavernDbContext BuildContext(params Character[] characters)
 		{
 			var context = GenerateContext();
 			if (characters.Length == 0)
@@ -28,7 +28,7 @@ namespace Tavern.Repository.UnitTests.Characters
 		public async Task TestProfileMapping(TestCase<CharacterModel> testCase)
 		{
 			// Arrange
-			var context = this.BuildContext(new[] { (Character)testCase.Data });
+			var context = BuildContext(new[] { (Character)testCase.Data });
 			using (var repo = new CharacterRepository(context))
 			{
 				// Act
@@ -44,7 +44,7 @@ namespace Tavern.Repository.UnitTests.Characters
 		[Fact]
 		public async Task Insert_GivenNewCharacter_ReturnsCharacter()
 		{
-			var context = this.BuildContext();
+			var context = BuildContext();
 			using (var repo = new CharacterRepository(context))
 			{
 				var result = await repo.Insert(new CharacterModel());
@@ -58,7 +58,7 @@ namespace Tavern.Repository.UnitTests.Characters
 		public async Task Update_GivenNewName_ReturnsCharacterWithNewName()
 		{
 			const string newName = "John";
-			var context = this.BuildContext(new Character { Name = newName });
+			var context = BuildContext(new Character { Name = newName });
 			var id = context.Characters.First().CharacterId;
 			using (var repo = new CharacterRepository(context))
 			{

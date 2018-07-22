@@ -6,14 +6,14 @@ namespace UnitTests.Core
 {
 	public abstract class TestBed
 	{
-		protected virtual TavernIdentityContext GenerateContext()
+		protected virtual TavernDbContext GenerateContext()
 		{
 			var serviceProvider = new ServiceCollection()
 				.AddEntityFrameworkInMemoryDatabase()
 				.AddEntityFrameworkProxies()
 				.BuildServiceProvider();
 
-			DbContextOptions<TavernIdentityContext> options = new DbContextOptionsBuilder<TavernIdentityContext>()
+			DbContextOptions<TavernDbContext> options = new DbContextOptionsBuilder<TavernDbContext>()
 				.UseInMemoryDatabase("MockDb")
 				.UseLazyLoadingProxies()
 				//Without this line, data will persist between tests.
@@ -22,7 +22,7 @@ namespace UnitTests.Core
 				.EnableSensitiveDataLogging()
 				.Options;
 
-			return new TavernIdentityContext(options);
+			return new TavernDbContext(options);
 		}
 	}
 }
