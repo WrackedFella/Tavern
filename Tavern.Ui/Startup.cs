@@ -139,15 +139,10 @@ namespace Tavern.Ui
 
             services
                 .AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
-				.AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
-                    //options.SerializerSettings.Converters.Add(new CustomJsonConverter());
-                    //options.SerializerSettings.ContractResolver = new CustomContractResolver();
-                });
+				.AddJsonOptions(options => options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ");
         }
 
-        private void ConfigureLogging(IServiceCollection services)
+        private static void ConfigureLogging(IServiceCollection services)
         {
             NLog.LogManager.LoadConfiguration("nlog.config");
             services.AddSingleton(new LoggerFactory().AddNLog());

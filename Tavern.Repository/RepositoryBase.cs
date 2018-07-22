@@ -7,6 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+using Tavern.Domain;
 
 namespace Tavern.Repository
 {
@@ -14,9 +15,9 @@ namespace Tavern.Repository
 		where TEntity : EntityBase
 		where TModel : ModelBase, IEquatable<TEntity>
 	{
-		protected readonly DbContext Context;
+		protected readonly TavernDbContext Context;
 
-		protected RepositoryBase(DbContext context)
+		protected RepositoryBase(TavernDbContext context)
 		{
 			this.Context = context;
 		}
