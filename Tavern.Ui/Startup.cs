@@ -139,7 +139,11 @@ namespace Tavern.Ui
                 .Build();
 
             services
-                .AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
+                .AddMvc(options => 
+	            {
+					options.Filters.Add(new AuthorizeFilter(policy));
+		            options.Filters.Add(new CustomAsyncActionFilter());
+	            })
 				.AddJsonOptions(options => {
 		            options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
 		            options.SerializerSettings.ContractResolver = new RenderDataContractResolver();
