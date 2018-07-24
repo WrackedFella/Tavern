@@ -15,7 +15,8 @@ namespace Tavern.Repository
 		where TEntity : EntityBase
 		where TModel : ModelBase, IEquatable<TEntity>
 	{
-		protected readonly TavernDbContext Context;
+        private const int Count = 10;
+        protected readonly TavernDbContext Context;
 
 		protected RepositoryBase(TavernDbContext context)
 		{
@@ -28,12 +29,21 @@ namespace Tavern.Repository
 			return entity == null ? null : Mapper.Map<TModel>(entity);
 		}
 
-		public virtual async Task<IEnumerable<TModel>> List()
+	    public virtual async Task<IEnumerable<TModel>> List()
+	    {
+	        return await this.Context.Set<TEntity>()
+	            .Take(Count)
+	            .ProjectTo<TModel>()
+                .ToListAsync();
+	    }
+	    
+        public virtual async Task<IEnumerable<object>> List(CollectionDescriptorSet<TEntity> descriptorSet)
 		{
-			// ToDo | Task | Paging
-			return await this.Context.Set<TEntity>()
-				.Take(1000)
-				.ProjectTo<TModel>()
+            return await this.Context.Set<TEntity>()
+                .Where(descriptorSet.Predicate)
+                .OrderBy(descriptorSet.OrderBy)
+                .Take(descriptorSet.PageSize * descriptorSet.Page)
+			    .Select(descriptorSet.Projection)
 				.ToListAsync();
 		}
 

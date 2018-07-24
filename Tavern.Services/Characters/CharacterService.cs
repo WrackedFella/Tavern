@@ -25,7 +25,18 @@ namespace Tavern.Services.Characters
 			return result;
 		}
 
-		public async Task<CharacterModel> Get(Guid id)
+	    //public async Task<IEnumerable<CharacterModel>> Get(CollectionDescriptorSet<TEntity> descriptorSet)
+	    //{
+	    //    IEnumerable<CharacterModel> result;
+	    //    using (var repo = new CharacterRepository(this._context))
+	    //    {
+	    //        result = await repo.List();
+	    //    }
+
+	    //    return result;
+	    //}
+
+        public async Task<CharacterModel> Get(Guid id)
 		{
 			CharacterModel result;
 			using (var repo = new CharacterRepository(this._context))
