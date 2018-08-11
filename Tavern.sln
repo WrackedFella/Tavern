@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Ui", "Tavern.Ui\Tave
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Auth", "Tavern.Auth\Tavern.Auth.csproj", "{DBA50F83-D830-4405-86D1-AC963BD74558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taver.OData", "Taver.OData\Taver.OData.csproj", "{AAB2DBB2-4043-45EF-88E4-252D47A09BB2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,10 +63,6 @@ Global
 		{DBA50F83-D830-4405-86D1-AC963BD74558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBA50F83-D830-4405-86D1-AC963BD74558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBA50F83-D830-4405-86D1-AC963BD74558}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAB2DBB2-4043-45EF-88E4-252D47A09BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAB2DBB2-4043-45EF-88E4-252D47A09BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAB2DBB2-4043-45EF-88E4-252D47A09BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAB2DBB2-4043-45EF-88E4-252D47A09BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

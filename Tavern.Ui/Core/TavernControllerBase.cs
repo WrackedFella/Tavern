@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -9,8 +10,7 @@ using Tavern.Services;
 
 namespace Tavern.Ui.Core
 {
-	[ApiController]
-	public abstract class TavernControllerBase<TModel> : Controller
+	public abstract class TavernControllerBase<TModel> : ODataController
 		where TModel : ModelBase
 	{
 		private readonly IService<TModel> _service;
@@ -21,6 +21,7 @@ namespace Tavern.Ui.Core
 		}
 
 		[HttpGet]
+		[EnableQuery]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(404)]
 		public virtual async Task<ActionResult<IEnumerable<TModel>>> Get()
@@ -29,6 +30,7 @@ namespace Tavern.Ui.Core
 		}
 
 		[HttpGet("{id}")]
+		[EnableQuery]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(400)]
 		[ProducesResponseType(404)]
@@ -39,7 +41,7 @@ namespace Tavern.Ui.Core
 			{
 				return NotFound();
 			}
-			
+
 			return Ok(model);
 		}
 
@@ -53,7 +55,7 @@ namespace Tavern.Ui.Core
 			{
 				return BadRequest();
 			}
-			
+
 			return CreatedAtRoute(new { id = result.Id }, result);
 		}
 

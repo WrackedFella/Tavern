@@ -6,11 +6,9 @@ using Tavern.Ui.Core;
 
 namespace Tavern.Ui.Characters
 {
-	[AllowAnonymous]
-	[Route("api/characters")]
-    public class CharacterApiController : TavernControllerBase<CharacterModel>
+	public class CharactersController : TavernControllerBase<CharacterModel>
 	{
-		public CharacterApiController(IService<CharacterModel> service) : base(service)
+		public CharactersController(IService<CharacterModel> service) : base(service)
 		{
 		}
 	}

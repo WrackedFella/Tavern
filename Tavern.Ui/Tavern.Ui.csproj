@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>5a8645d0-1120-42f9-990a-f8b8248838a5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.6.0" />
   </ItemGroup>
 
