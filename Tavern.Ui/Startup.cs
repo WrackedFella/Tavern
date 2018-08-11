@@ -142,7 +142,7 @@ namespace Tavern.Ui
                 .AddMvc(options => 
 	            {
 					options.Filters.Add(new AuthorizeFilter(policy));
-		            options.Filters.Add(new CustomAsyncActionFilter());
+		            options.Filters.Add(new CustomAsyncActionFilter()); // EXAMPLE TEST OF VALIDATOR REQUEST & RESPONSE MECHANISM.
 	            })
 				.AddJsonOptions(options => {
 		            options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";

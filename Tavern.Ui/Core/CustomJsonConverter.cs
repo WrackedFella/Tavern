@@ -73,10 +73,14 @@ namespace Tavern.Ui.Core
 					value,
 					attributes = this.AttributeNames.Join(", ")
 				};
-				writer.WriteValue(JsonConvert.SerializeObject(customValue));
-			}
+#if DEBUG
+                writer.WriteValue(JsonConvert.SerializeObject(customValue, Formatting.Indented));
+#else
+                writer.WriteValue(JsonConvert.SerializeObject(customValue, Formatting.None));
+#endif
+            }
 
-			//writer.WriteValue(jvalue + this.DisplayNamesPostfix);
-		}
+            //writer.WriteValue(jvalue + this.DisplayNamesPostfix);
+        }
 	}
 }
