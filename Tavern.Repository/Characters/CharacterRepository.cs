@@ -2,16 +2,16 @@
 using System.Linq.Expressions;
 using AutoMapper;
 using LinqKit;
-using Microsoft.EntityFrameworkCore;
+using Tavern.Domain;
 using Tavern.Domain.Characters;
 
 namespace Tavern.Repository.Characters
 {
 	public class CharacterRepository : RepositoryBase<Character, CharacterModel>, IDisposable
 	{
-		private readonly DbContext _context;
+		private readonly TavernDbContext _context;
 
-		public CharacterRepository(DbContext context) : base(context)
+		public CharacterRepository(TavernDbContext context) : base(context)
 		{
 			this._context = context;
 			Mapper.Initialize(x => {

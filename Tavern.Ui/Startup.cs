@@ -22,6 +22,7 @@ using Tavern.Domain;
 using Tavern.Repository.Characters;
 using Tavern.Services;
 using Tavern.Services.Characters;
+using Tavern.Ui.Core;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui
@@ -138,16 +139,18 @@ namespace Tavern.Ui
                 .Build();
 
             services
-                .AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
-				.AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
-                    //options.SerializerSettings.Converters.Add(new CustomJsonConverter());
-                    //options.SerializerSettings.ContractResolver = new CustomContractResolver();
-                });
+                .AddMvc(options => 
+	            {
+					options.Filters.Add(new AuthorizeFilter(policy));
+		            options.Filters.Add(new CustomAsyncActionFilter()); // EXAMPLE TEST OF VALIDATOR REQUEST & RESPONSE MECHANISM.
+	            })
+				.AddJsonOptions(options => {
+		            options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
+		            options.SerializerSettings.ContractResolver = new RenderDataContractResolver();
+	            });
         }
 
-        private void ConfigureLogging(IServiceCollection services)
+        private static void ConfigureLogging(IServiceCollection services)
         {
             NLog.LogManager.LoadConfiguration("nlog.config");
             services.AddSingleton(new LoggerFactory().AddNLog());

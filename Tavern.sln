@@ -19,7 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Services.UnitTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Ui", "Tavern.Ui\Tavern.Ui.csproj", "{8B1FE82E-B520-4646-BF58-3C39E3E72F03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavern.Auth", "Tavern.Auth\Tavern.Auth.csproj", "{DBA50F83-D830-4405-86D1-AC963BD74558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavern.Auth", "Tavern.Auth\Tavern.Auth.csproj", "{DBA50F83-D830-4405-86D1-AC963BD74558}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1DF18C3-1DF0-4794-BD4E-9695D3C3ED7A}"
+	ProjectSection(SolutionItems) = preProject
+		jsonSchema.json = jsonSchema.json
+		Resources.txt = Resources.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
