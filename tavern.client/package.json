@@ -1,5 +1,5 @@
 {
-  "name": "tavern.client",
+  "name": "Tavern.Client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,19 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "growl": "^1.10.5",
-    "vue": "^2.5.16",
+    "vue": "^2.5.17",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-e2e-nightwatch": "^3.0.0-rc.10",
-    "@vue/cli-plugin-unit-jest": "^3.0.0-rc.10",
-    "@vue/cli-service": "^3.0.0-rc.10",
+    "@vue/cli-plugin-e2e-nightwatch": "^3.0.0",
+    "@vue/cli-plugin-unit-jest": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
     "@vue/test-utils": "^1.0.0-beta.20",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.17"
   },
   "postcss": {
     "plugins": {
