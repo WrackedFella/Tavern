@@ -27,6 +27,7 @@ Service | Contains Business Logic about a specific Model. Potentially composited
 This pattern is loosely based on [this article.](https://www.c-sharpcorner.com/article/onion-architecture-in-asp-net-core-mvc/)
 
 ### Domain Layer
+#### Responsible For: Defining the Tables/Entities (Data At-Rest)
 
 The Source of Truth or System of Record. The database definition. For the purpose of this project, it is an EntityFrameworkCore DbContext with each SQL Schema represented by an associated folder and namespace. This enables Code-First to be used going forward, or you can continue with Database-First. This layer is similar to the traditional DAL or Data Access Layer, though stripped down.
 
@@ -35,6 +36,7 @@ The Source of Truth or System of Record. The database definition. For the purpos
 - Only the Repository Layer should know about anything in this layer.
 
 ### Repository Layer
+#### Responsible For: Transforming the Data from At-Rest Entity to In-Use Models
 
 This layer provides an abstraction between the data at rest (in the Database) and in use (in the Application Services layer). AutoMapper is used to provide a streamlined way of defining data projections of Entities over Models. 
 
@@ -45,6 +47,7 @@ This layer provides an abstraction between the data at rest (in the Database) an
 - Only the Services Layer should be dependent on this layer.
 
 ### Service Layer
+#### Responsible For: Data Mutation / Business Logic
 
 Provides services that map one-for-one to business use cases. This layer may use compositional inheritance to provide a facade to multiple Repositories. This layer is synonymous with the traditional BLL or Business Logic Layer. 
 
@@ -54,9 +57,10 @@ Provides services that map one-for-one to business use cases. This layer may use
 - ToDo: Explore functional programming concepts in this layer particularly
 
 ### UI Layer
+#### Responsible For: Data Presentation and User Input
 
-Exactly what you'd expect. The presentation layer. This layer may be implemented in a separate repository where I explore different options for implementation. In the case of an SPA, this layer will most likely be an API endpoint that exposes the Service Layer for direct interaction with a client. 
+Currently targeting a RESTful API, following these guidline documents:
 
-- Provides users with a way to manipulate data
-- ToDo: Provide Vue, Angular, and MVC samples
+- [API Design Cheat Sheet](https://github.com/RestCheatSheet/api-cheat-sheet#api-design-cheat-sheet)
+- [Platform Building Cheatsheet](https://github.com/RestCheatSheet/platform-cheat-sheet#platform-building-cheat-sheet)
 
