@@ -14,7 +14,7 @@ namespace Tavern.Ui.Json.Serialization
     /// 
     /// </summary>
     /// <remarks>
-    /// Will provide Meta Information for the topic of validators for any model.
+    /// Will provide Meta Information for the topic of validators for any object model.
     /// </remarks>
     /// <example>
     /// JsonConvert.SerializeObject(object, Formatting.Indented, new CustomConverter())

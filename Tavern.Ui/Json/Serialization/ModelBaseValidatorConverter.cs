@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Tavern.Repository.Characters;
 using System.Linq;
+using Shared;
 
 namespace Tavern.Ui.Json.Serialization
 {
     /// <summary>
-    /// (FOR EXAMPLE ONLY: DO NOT USE)
     /// 
     /// Use this MetaValidatorConvertor with JsonConvert.SerializeObject to provide strictly meta validator information pertaining to this object. 
     /// Classes supported are any of the following type ValidationAttribute.
@@ -16,14 +16,15 @@ namespace Tavern.Ui.Json.Serialization
     /// </summary>
     /// <seealso cref="MetaValidatorConverter"/>
     /// <remarks>
-    /// Will provide
+    /// Will provide meta information or an empty object if type is of ModelBase. FOR OBJECTS OF THE TYPE ModelBase ONLY
     /// </remarks>
     /// <example>
     /// JsonConvert.SerializeObject(object, Formatting.Indented, new CustomConverter())
     /// </example>
-    public class CharacterModelMetaValidatorConverter : JsonConverter<CharacterModel>
+    public class ModelBaseMetaValidatorConverter : JsonConverter<ModelBase>
     {
-        public override CharacterModel ReadJson(JsonReader reader, Type objectType, CharacterModel existingValue, bool hasExistingValue, JsonSerializer serializer)
+
+        public override ModelBase ReadJson(JsonReader reader, Type objectType, ModelBase existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +35,7 @@ namespace Tavern.Ui.Json.Serialization
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="serializer"></param>
-        public override void WriteJson(JsonWriter writer, CharacterModel value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, ModelBase value, JsonSerializer serializer)
         {
             PropertyInfo[] props = value.GetType().GetProperties();
             
