@@ -1,29 +1,32 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using Tavern.Repository.Characters;
 using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Tavern.Ui.Json.Serialization
 {
     /// <summary>
-    /// (FOR EXAMPLE ONLY: DO NOT USE)
-    /// 
     /// Use this MetaValidatorConvertor with JsonConvert.SerializeObject to provide strictly meta validator information pertaining to this object. 
     /// Classes supported are any of the following type ValidationAttribute.
     /// 
     /// </summary>
-    /// <seealso cref="MetaValidatorConverter"/>
     /// <remarks>
-    /// Will provide
+    /// Will provide Meta Information for the topic of validators for any model.
     /// </remarks>
     /// <example>
     /// JsonConvert.SerializeObject(object, Formatting.Indented, new CustomConverter())
     /// </example>
-    public class CharacterModelMetaValidatorConverter : JsonConverter<CharacterModel>
+    public class MetaValidatorConverter : JsonConverter
     {
-        public override CharacterModel ReadJson(JsonReader reader, Type objectType, CharacterModel existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override bool CanConvert(Type objectType)
+        {
+            return true;
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
@@ -34,15 +37,15 @@ namespace Tavern.Ui.Json.Serialization
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="serializer"></param>
-        public override void WriteJson(JsonWriter writer, CharacterModel value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             PropertyInfo[] props = value.GetType().GetProperties();
-            
+
             writer.WriteStartObject();
 
             foreach (var p in props)
             {
-                
+
                 var atts = p.GetCustomAttributes(typeof(ValidationAttribute));
                 int attributeCount = atts.Count();
                 if (attributeCount == 0)
@@ -54,29 +57,29 @@ namespace Tavern.Ui.Json.Serialization
                 // add info about what member is to be validated.
                 writer.WritePropertyName(propertyName);
                 writer.WriteStartObject();
-                    writer.WritePropertyName("DataType");
-                    writer.WriteValue(propertyType);
+                writer.WritePropertyName("DataType");
+                writer.WriteValue(propertyType);
 
-                
-                    writer.WritePropertyName("validators");
-                    writer.WriteStartObject();
+
+                writer.WritePropertyName("validators");
+                writer.WriteStartObject();
 
                 foreach (var a in atts)
                 {
                     // shorthand for our fully qualified type name.
                     string fqTypeName = a.GetType().ToString();
-                    writer.WritePropertyName(fqTypeName.Substring(fqTypeName.LastIndexOf(".")+1));
+                    writer.WritePropertyName(fqTypeName.Substring(fqTypeName.LastIndexOf(".") + 1));
 
                     // get standard serialization of attribute object
-                    string objout = JsonConvert.SerializeObject(a, new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.EscapeNonAscii }); 
-                    
+                    string objout = JsonConvert.SerializeObject(a, new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.EscapeNonAscii });
+
                     // ignore "TypeId" member.
                     int idx = objout.IndexOf(",\"TypeId\"");
-                    objout = objout.Remove(idx, (objout.IndexOf("\"", idx + 19)-idx)+1);
-                    writer.WriteRawValue(objout); 
+                    objout = objout.Remove(idx, (objout.IndexOf("\"", idx + 19) - idx) + 1);
+                    writer.WriteRawValue(objout);
                 }
 
-                    writer.WriteEndObject();
+                writer.WriteEndObject();
                 writer.WriteEndObject();
             }
 
@@ -84,5 +87,4 @@ namespace Tavern.Ui.Json.Serialization
             writer.WriteEndObject();
         }
     }
-
 }
