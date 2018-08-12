@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Tavern.Repository.Characters;
+using System.Linq;
 
 namespace Tavern.Ui.Json.Serialization
 {
@@ -33,51 +34,52 @@ namespace Tavern.Ui.Json.Serialization
         public override void WriteJson(JsonWriter writer, CharacterModel value, JsonSerializer serializer)
         {
             PropertyInfo[] props = value.GetType().GetProperties();
-            bool attributesFound = false;
-            foreach(var p in props)
-            {
-                var atts = p.GetCustomAttributes(typeof(ValidationAttribute));
+            
+            writer.WriteStartObject();
 
+            foreach (var p in props)
+            {
+                
+                var atts = p.GetCustomAttributes(typeof(ValidationAttribute));
+                int attributeCount = atts.Count();
+                if (attributeCount == 0)
+                    continue;
+
+                string propertyName = p.Name;
+                string propertyType = p.PropertyType.ToString().Replace("System.", "");
+
+                // add info about what member is to be validated.
+                writer.WritePropertyName(propertyName);
                 writer.WriteStartObject();
+                    writer.WritePropertyName("DataType");
+                    writer.WriteValue(propertyType);
+
+                
+                    writer.WritePropertyName("validators");
+                    writer.WriteStartObject();
 
                 foreach (var a in atts)
                 {
-                    if( attributesFound == false )
-                    {
-                        // start array.
-                        attributesFound = true;
-                    }
-
                     // shorthand for our fully qualified type name.
                     string fqTypeName = a.GetType().ToString();
                     writer.WritePropertyName(fqTypeName.Substring(fqTypeName.LastIndexOf(".")+1));
 
                     // get standard serialization of attribute object
-                    writer.WriteValue(JsonConvert.SerializeObject(a)); //string attjson = JsonConvert.SerializeObject(a); // serializer.Serialize(writer, a)
-
-                    // append to property as object data.
-                    //writer.WriteRaw(attjson);
-
+                    string objout = JsonConvert.SerializeObject(a, new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.EscapeNonAscii }); 
                     
+                    // ignore "TypeId" member.
+                    int idx = objout.IndexOf(",\"TypeId\"");
+                    objout = objout.Remove(idx, (objout.IndexOf("\"", idx + 19)-idx)+1);
+                    writer.WriteRawValue(objout); 
                 }
 
-                if (attributesFound)
-                {
-                    writer.WriteEnd();
-                    attributesFound = false;
-                }
+                    writer.WriteEndObject();
+                writer.WriteEndObject();
             }
 
-            //writer.WriteEnd();
-
-            // end array.
+            // end array of validators.
             writer.WriteEndObject();
-
         }
     }
 
-
-    public class CharacterModelJsonSerializer
-    {
-    }
 }
