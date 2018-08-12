@@ -34,7 +34,7 @@ namespace Tavern.UI.UnitTests
 		[Fact]
 		public void ValidationSerializerTest_MetaValidatorConverter()
 		{
-			string validatorsResponseheader = JsonConvert.SerializeObject(new Character(), Formatting.None, new MetaValidatorConverter());
+			string validatorsResponseheader = JsonConvert.SerializeObject(new CharacterModel(), Formatting.None, new MetaValidatorConverter());
 
 			Assert.Contains("RequiredAttribute", validatorsResponseheader); // a_request.Headers["validator"]
 			Assert.Contains("MinLengthAttribute", validatorsResponseheader); // a_request.Headers["validator"]
