@@ -32,7 +32,7 @@ namespace Tavern.UI.UnitTests
 		}
 
 		[Fact]
-		public void Get_GivenValidationHeader_ShouldReturnValidatorHeader()
+		public void ValidationSerializerTest_MetaValidatorConverter()
 		{
 			string validatorsResponseheader = JsonConvert.SerializeObject(new CharacterModel(), Formatting.None, new MetaValidatorConverter());
 
