@@ -146,7 +146,6 @@ namespace Tavern.Ui
 	            })
 				.AddJsonOptions(options => {
 		            options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
-		            options.SerializerSettings.ContractResolver = new RenderDataContractResolver();
 	            });
         }
 
