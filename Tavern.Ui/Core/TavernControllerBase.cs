@@ -96,5 +96,10 @@ namespace Tavern.Ui.Core
 			await this._service.Delete(id);
 			return Ok();
 		}
+
+		public object ResourceRenderData()
+		{
+			return new object();
+		}
 	}
 }

@@ -26,6 +26,7 @@ using Tavern.Domain;
 using Tavern.Repository.Characters;
 using Tavern.Services;
 using Tavern.Services.Characters;
+using Tavern.Ui.Core;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui

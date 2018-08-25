@@ -23,6 +23,15 @@ namespace Tavern.Ui.ExceptionHandling
             try
             {
                 await this._next(context);
+
+
+                foreach(var key in context.Request.Headers.Keys)
+                {
+                    //context.Request.Form[]
+
+                }
+
+               
             }
             catch (Exception ex)
             {

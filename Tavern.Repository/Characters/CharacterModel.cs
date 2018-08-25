@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using Shared;
@@ -9,9 +10,11 @@ namespace Tavern.Repository.Characters
 	public class CharacterModel : ModelBase, IEquatable<Character>
 	{
 		[Required, MinLength(2), MaxLength(100)]
+		[DisplayName("Character Name")]
 		public string Name { get; set; }
 
 		[MaxLength(255)]
+		[DisplayName("Describe Them!")]
 		public string Description { get; set; }
 
 		public Expression<Func<Character, bool>> BuildPredicate()
