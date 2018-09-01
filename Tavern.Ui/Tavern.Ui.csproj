@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.6.0" />
@@ -25,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Tavern.Auth\Tavern.Auth.csproj" />
     <ProjectReference Include="..\Tavern.Domain\Tavern.Domain.csproj" />
-    <ProjectReference Include="..\Tavern.Services\Tavern.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

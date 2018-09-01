@@ -2,7 +2,7 @@
 
 namespace Shared
 {
-	public abstract class EntityBase
+	public abstract class ModelBase
 	{
 		public Guid Id { get; set; }
 	}

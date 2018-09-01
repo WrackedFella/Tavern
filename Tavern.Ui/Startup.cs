@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,10 +22,7 @@ using NLog.Extensions.Logging;
 using Tavern.Auth.IdentityContext;
 using Tavern.Auth.Models;
 using Tavern.Domain;
-using Tavern.Repository.Characters;
-using Tavern.Services;
-using Tavern.Services.Characters;
-using Tavern.Ui.Core;
+using Tavern.Domain.Characters;
 using Tavern.Ui.ExceptionHandling;
 
 namespace Tavern.Ui
@@ -50,7 +46,6 @@ namespace Tavern.Ui
 			services.AddSingleton(this.Configuration);
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped<DbContext, TavernDbContext>();
-			services.AddScoped<IService<CharacterModel>, CharacterService>();
 
 			ConfigureContexts(services);
 			ConfigureAuth(services);
@@ -170,7 +165,7 @@ namespace Tavern.Ui
 		private static IEdmModel GetEdmModel()
 		{
 			ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-			builder.EntitySet<CharacterModel>("Characters");
+			builder.EntitySet<Character>("Characters");
 			//builder.EntitySet<Press>("Presses");
 			return builder.GetEdmModel();
 		}

@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Tavern.Repository.Characters;
-using Tavern.Services;
+﻿using Tavern.Domain;
+using Tavern.Domain.Characters;
 using Tavern.Ui.Core;
 
 namespace Tavern.Ui.Characters
 {
-	public class CharactersController : TavernControllerBase<CharacterModel>
+	public class CharactersController : TavernControllerBase<Character>
 	{
-		public CharactersController(IService<CharacterModel> service) : base(service)
+		public CharactersController(TavernDbContext context) : base(context)
 		{
 		}
 	}
