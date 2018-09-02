@@ -5,9 +5,8 @@ using Shared;
 
 namespace Tavern.Domain.Characters
 {
-	public class Character : AuditEntityBase
+	public class Character : AuditModelBase
 	{
-
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public Guid CharacterId

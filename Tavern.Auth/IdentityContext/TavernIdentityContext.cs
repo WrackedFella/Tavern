@@ -5,8 +5,8 @@ using Tavern.Auth.Models;
 
 namespace Tavern.Auth.IdentityContext
 {
-    public class TavernIdentityContext : IdentityDbContext<TavernUser, TavernRole, Guid>
-    {
+	public class TavernIdentityContext : IdentityDbContext<TavernUser, TavernRole, Guid>
+	{
 		public TavernIdentityContext()
 		{
 		}
@@ -26,7 +26,6 @@ namespace Tavern.Auth.IdentityContext
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-
 			base.OnModelCreating(modelBuilder);
 		}
 	}

@@ -13,10 +13,4 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tavern.Domain\Tavern.Domain.csproj" />
-    <ProjectReference Include="..\Tavern.Services\Tavern.Services.csproj" />
-    <ProjectReference Include="..\UnitTests.Core\UnitTests.Core.csproj" />
-  </ItemGroup>
-
 </Project>

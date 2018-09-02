@@ -29,13 +29,14 @@ namespace Tavern.Domain
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Character>(x => {
+			modelBuilder.Entity<Character>(x =>
+			{
 				x.Property(b => b.CharacterId)
 					.HasDefaultValueSql("newid()")
 					.HasValueGenerator<GuidValueGenerator>();
 				x.Property(b => b.CreatedDate).HasDefaultValueSql("getdate()");
 			});
-			
+
 			base.OnModelCreating(modelBuilder);
 		}
 	}

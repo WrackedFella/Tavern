@@ -2,7 +2,7 @@
 
 namespace Shared
 {
-	public abstract class AuditEntityBase : EntityBase
+	public abstract class AuditModelBase : ModelBase
 	{
 		public string CreatedBy { get; set; }
 		public DateTimeOffset CreatedDate { get; set; } = DateTimeOffset.Now;
