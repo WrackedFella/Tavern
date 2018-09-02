@@ -30,7 +30,7 @@ namespace Tavern.Ui.Core
 		[ProducesResponseType(404)]
 		public virtual ActionResult<IEnumerable<TModel>> Get()
 		{
-			return Ok(this._context.Set<TModel>().AsQueryable());
+			return Ok(this._context.Set<TModel>());
 		}
 
 		[HttpGet("{id}")]
@@ -57,7 +57,7 @@ namespace Tavern.Ui.Core
 			await this._context.Set<TModel>().AddAsync(model);
 			await this._context.SaveChangesAsync();
 
-			return CreatedAtRoute(new { id = model.Id }, model);
+			return CreatedAtRoute(new { id = model.GetId() }, model);
 		}
 
 		[HttpPut("{id}")]
@@ -73,7 +73,7 @@ namespace Tavern.Ui.Core
 
 			var result = Mapper.Map(model, target);
 			await this._context.SaveChangesAsync();
-			return AcceptedAtRoute(new { id = result.Id }, result);
+			return AcceptedAtRoute(new { id = result.GetId() }, result);
 		}
 
 		[HttpPatch("{id}")]
@@ -87,7 +87,7 @@ namespace Tavern.Ui.Core
 
 			patch.ApplyTo(target);
 			await this._context.SaveChangesAsync();
-			return AcceptedAtRoute(new { id = target.Id }, target);
+			return AcceptedAtRoute(new { id = target.GetId() }, target);
 		}
 
 		[HttpDelete("{id}")]
