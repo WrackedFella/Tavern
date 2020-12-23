@@ -84,6 +84,11 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.min.css
+*.css
+*.min.js
+*.css.map
+*.js.map
 
 # Chutzpah Test files
 _Chutzpah*
@@ -328,3 +333,10 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Custom Files
+**/wwwroot/css
+/.vscode
+*.png
+*.es5.js
+**/*.config/dotnet-tools.json
