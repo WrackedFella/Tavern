@@ -1,0 +1,18 @@
+ Volume in drive C is Charlie
+ Volume Serial Number is A403-B852
+
+ Directory of c:\dev\projects\Tavern\Tavern.Domain\Shadowrun
+
+03/08/2021  21:45    <DIR>          .
+03/08/2021  21:45    <DIR>          ..
+03/08/2021  21:22               382 Alias.cs
+03/08/2021  21:39             1,291 Character.cs
+03/08/2021  21:34               294 CharacterSkill.cs
+03/08/2021  21:35               412 CharacterSkillGroup.cs
+03/08/2021  21:15               213 Contact.cs
+03/08/2021  21:45                 0 lazy.txt
+03/08/2021  21:44               498 Quality.cs
+03/08/2021  21:32               375 Skill.cs
+03/08/2021  21:32               427 SkillGroup.cs
+               9 File(s)          3,892 bytes
+               2 Dir(s)  67,898,834,944 bytes free
