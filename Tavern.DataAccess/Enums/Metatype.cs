@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tavern.Domain.Enums
+namespace Tavern.DataAccess.Enums
 {
     public enum Metatype
     {

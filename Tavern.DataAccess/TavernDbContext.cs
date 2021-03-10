@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Tavern.Domain.Auth;
-using Tavern.Domain.Shadowrun;
+using Tavern.DataAccess.Auth;
+using Tavern.DataAccess.Shadowrun;
 
-namespace Tavern.Domain
+namespace Tavern.DataAccess
 {
     public class TavernDbContext : IdentityDbContext<TavernUser, TavernRole, Guid>
     {

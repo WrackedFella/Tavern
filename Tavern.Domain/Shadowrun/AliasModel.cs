@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tavern.Domain.Shadowrun
 {
-    public class Alias
+    public class AliasModel
     {
         public Guid AliasId { get; set; }
         public string FirstName { get; set; }

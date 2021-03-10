@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tavern.Domain.Enums;
+using Tavern.DataAccess.Enums;
 
-namespace Tavern.Domain.GameObjects
+namespace Tavern.DataAccess.GameObjects
 {
     public abstract class CharacterBase
     {

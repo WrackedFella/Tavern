@@ -4,12 +4,10 @@ using System.Text;
 
 namespace Tavern.Domain.Shadowrun
 {
-    public class CharacterSkillGroup
+    public class CharacterSkillModel
     {
         public Guid CharacterId { get; set; }
-        public Guid SkillGroupId { get; set; }
+        public Guid SkillId { get; set; }
         public int Rating { get; set; }
-
-        public virtual ICollection<CharacterSkill> Skills { get; set; } = new HashSet<CharacterSkill>();
     }
 }

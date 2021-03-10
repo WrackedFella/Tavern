@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tavern.Domain.Shadowrun
+namespace Tavern.DataAccess.Shadowrun
 {
     public class Skill
     {

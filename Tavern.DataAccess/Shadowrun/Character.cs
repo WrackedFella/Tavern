@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tavern.Domain.Enums;
-using Tavern.Domain.GameObjects;
+using Tavern.DataAccess.Enums;
+using Tavern.DataAccess.GameObjects;
 
-namespace Tavern.Domain.Shadowrun
+namespace Tavern.DataAccess.Shadowrun
 {
     public class Character : CharacterBase
     {

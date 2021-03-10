@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tavern.Domain.Auth
+namespace Tavern.DataAccess.Auth
 {
     public class TavernRole : IdentityRole<Guid>
     {
