@@ -16,7 +16,6 @@ namespace Tavern.DataAccess.GameObjects
         public int Height { get; set; }
         public int Weight { get; set; }
 
-
         public int Experience { get; set; }
         public decimal Money { get; set; }
 
