@@ -5,21 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Tavern.Blazor.Data;
+using Tavern.DataAccess;
 
 namespace Tavern.Blazor
 {
     public class Startup
     {
+        private readonly string _connectionString;
+
         public Startup(IConfiguration configuration)
         {
+            var connectionString = configuration.GetConnectionString("Db");
+            _connectionString = connectionString;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+
+        private void ConfigureContexts(IServiceCollection services)
+        {
+            services.AddDbContextFactory<TavernDbContext>(options =>
+            {
+                options.UseSqlServer(_connectionString);
+#if DEBUG
+                options.EnableSensitiveDataLogging();
+#endif
+            });
+
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -27,7 +45,7 @@ namespace Tavern.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            ConfigureContexts(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
