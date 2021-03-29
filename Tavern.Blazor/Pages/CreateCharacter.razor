@@ -1,0 +1,21 @@
+﻿@page "/TestComponentA"
+
+@using Tavern.DataAccess.GameObjects
+@using Tavern.Blazor.Validation
+@using Tavern.Blazor.ViewModels
+
+
+@inherits CreateCharacterViewModel
+
+<h1>Create Character</h1>
+
+<EditForm Model="@ViewModel.Model" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <CustomValidator @ref="Model.customValidator" />
+    <ValidationSummary />
+
+    ...
+
+</EditForm>
+
+<!--TODO: add necessary base classes to use VMs -->
