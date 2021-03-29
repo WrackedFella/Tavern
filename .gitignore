@@ -340,3 +340,4 @@ ASALocalRun/
 *.png
 *.es5.js
 **/*.config/dotnet-tools.json
+Migrations
