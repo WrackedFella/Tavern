@@ -12,9 +12,9 @@ namespace Tavern.Domain.Shadowrun.Services
 
     public class CharacterService : ICharacterService
     {
-        private readonly ITavernDbContext _dbContext;
+        private readonly ITavernContext _dbContext;
 
-        public CharacterService(ITavernDbContext dbContext)
+        public CharacterService(ITavernContext dbContext)
         {
             this._dbContext = dbContext;
         }

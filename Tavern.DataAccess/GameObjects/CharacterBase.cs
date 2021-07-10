@@ -1,5 +1,4 @@
 ﻿using System;
-using Tavern.DataAccess.Core;
 
 namespace Tavern.DataAccess.GameObjects
 {

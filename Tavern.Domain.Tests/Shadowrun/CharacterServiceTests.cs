@@ -16,7 +16,7 @@ namespace Tavern.Domain.Tests.Shadowrun
         [Fact]
         public async Task GenerateNpc_GivenAnyParameters_ShouldGenerateFullCharacter()
         {
-            var mockContext = new Mock<TavernDbContext>();
+            var mockContext = new Mock<TavernContext>();
             // ToDo: Mock out the other things we'd want to include
             mockContext.Setup(x => x.Characters)
                 .Returns(GenerateMockDbSet(new List<Character>

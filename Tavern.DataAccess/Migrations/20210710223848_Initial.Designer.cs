@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tavern.DataAccess;
 
 namespace Tavern.DataAccess.Migrations
 {
-    [DbContext(typeof(TavernDbContext))]
-    partial class TavernDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TavernContext))]
+    [Migration("20210710223848_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -216,6 +218,56 @@ namespace Tavern.DataAccess.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Tavern.DataAccess.Common.CharacterName", b =>
+                {
+                    b.Property<Guid>("CharacterNameId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("(newid())");
+
+                    b.Property<int?>("GameSystem")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Origins")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeOfName")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharacterNameId");
+
+                    b.ToTable("CharacterNames");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterNameId = new Guid("e4c618c1-e7cd-48ac-b945-1e9a79ec9638"),
+                            Name = "Captain",
+                            TypeOfName = 3
+                        },
+                        new
+                        {
+                            CharacterNameId = new Guid("30e5fa46-1179-451d-9164-e1932e8c4ba5"),
+                            Name = "Jean Luc",
+                            TypeOfName = 0
+                        },
+                        new
+                        {
+                            CharacterNameId = new Guid("76dda7a7-45c2-43b7-b5fe-c35c0abb63d4"),
+                            Name = "Luc",
+                            TypeOfName = 1
+                        },
+                        new
+                        {
+                            CharacterNameId = new Guid("501d46ea-5c67-403e-85ab-bc148fa843b6"),
+                            Name = "Picard",
+                            TypeOfName = 2
+                        });
+                });
+
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.Alias", b =>
                 {
                     b.Property<Guid>("AliasId")
@@ -242,7 +294,7 @@ namespace Tavern.DataAccess.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Alias");
+                    b.ToTable("Aliases");
                 });
 
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.Character", b =>
@@ -255,9 +307,24 @@ namespace Tavern.DataAccess.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("Agility")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Body")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Charisma")
+                        .HasColumnType("int");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Edge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Essence")
+                        .HasColumnType("int");
 
                     b.Property<int>("Experience")
                         .HasColumnType("int");
@@ -268,11 +335,23 @@ namespace Tavern.DataAccess.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("Height")
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<int>("Initiative")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Intuition")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Logic")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Magic")
+                        .HasColumnType("int");
 
                     b.Property<int>("Metatype")
                         .HasColumnType("int");
@@ -289,15 +368,27 @@ namespace Tavern.DataAccess.Migrations
                     b.Property<int>("PublicAwareness")
                         .HasColumnType("int");
 
+                    b.Property<int>("Reaction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Resonance")
+                        .HasColumnType("int");
+
                     b.Property<int>("StreetCred")
                         .HasColumnType("int");
 
-                    b.Property<int>("Weight")
+                    b.Property<int>("Strength")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<int>("Willpower")
                         .HasColumnType("int");
 
                     b.HasKey("CharacterId");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Character");
                 });
@@ -305,7 +396,9 @@ namespace Tavern.DataAccess.Migrations
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.CharacterSkill", b =>
                 {
                     b.Property<Guid>("CharacterId")
-                        .HasColumnType("uniqueidentifier");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("(newid())");
 
                     b.Property<Guid>("SkillId")
                         .HasColumnType("uniqueidentifier");
@@ -368,7 +461,7 @@ namespace Tavern.DataAccess.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Quality");
+                    b.ToTable("Qualities");
                 });
 
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.Skill", b =>
@@ -394,7 +487,7 @@ namespace Tavern.DataAccess.Migrations
 
                     b.HasIndex("SkillGroupId");
 
-                    b.ToTable("Skill");
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.SkillGroup", b =>
@@ -415,7 +508,7 @@ namespace Tavern.DataAccess.Migrations
 
                     b.HasKey("SkillGroupId");
 
-                    b.ToTable("SkillGroup");
+                    b.ToTable("SkillGroups");
                 });
 
             modelBuilder.Entity("Tavern.DataAccess.Shadowrun.Contact", b =>

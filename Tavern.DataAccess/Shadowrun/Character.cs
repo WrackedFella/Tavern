@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Tavern.DataAccess.Core;
 using Tavern.DataAccess.GameObjects;
 using Tavern.DataAccess.Shadowrun.Attributes;
 using static Tavern.DataAccess.Shadowrun.Attributes.AttributeCategoryAttribute;

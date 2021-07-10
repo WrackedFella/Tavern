@@ -1,14 +1,29 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Linq;
 using Tavern.DataAccess.Auth;
+using Tavern.DataAccess.Common;
 using Tavern.DataAccess.Shadowrun;
 
 namespace Tavern.DataAccess
 {
-    public interface ITavernDbContext
+    public class TavernContextFactory : IDesignTimeDbContextFactory<TavernContext>
     {
+        public TavernContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<TavernContext>();
+            optionsBuilder.UseSqlServer("Server=.;Database=Tavern;Trusted_Connection=True;");
+
+            return new TavernContext(optionsBuilder.Options);
+        }
+    }
+
+    public interface ITavernContext
+    {
+        //DbSet<CharacterName> CharacterNames { get; set; }
+
         DbSet<Alias> Aliases { get; set; }
         DbSet<Character> Characters { get; set; }
         DbSet<CharacterSkill> CharacterSkills { get; set; }
@@ -19,18 +34,20 @@ namespace Tavern.DataAccess
         DbSet<SkillGroup> SkillGroups { get; set; }
     }
 
-    public class TavernDbContext : IdentityDbContext<TavernUser, TavernRole, Guid>, ITavernDbContext
+    public class TavernContext : IdentityDbContext<TavernUser, TavernRole, Guid>, ITavernContext
     {
-        protected TavernDbContext()
+        protected TavernContext()
         {
         }
 
-        public TavernDbContext(DbContextOptions options) : base(options)
+        public TavernContext(DbContextOptions options) : base(options)
         {
         }
 
         #region Tables
-        
+
+        public virtual DbSet<CharacterName> CharacterNames { get; set; }
+
         public virtual DbSet<Alias> Aliases { get; set; }
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<CharacterSkill> CharacterSkills { get; set; }
@@ -64,6 +81,17 @@ namespace Tavern.DataAccess
             }
 
             base.OnModelCreating(builder);
+
+            builder.Entity<CharacterName>(cs =>
+            {
+                cs.ToTable("CharacterNames")
+                    .HasData(
+                        new CharacterName { CharacterNameId = Guid.NewGuid(), TypeOfName = TypeOfName.Nickname, Name = "Captain" },
+                        new CharacterName { CharacterNameId = Guid.NewGuid(), TypeOfName = TypeOfName.First, Name = "Jean Luc" },
+                        new CharacterName { CharacterNameId = Guid.NewGuid(), TypeOfName = TypeOfName.Middle, Name = "Luc" },
+                        new CharacterName { CharacterNameId = Guid.NewGuid(), TypeOfName = TypeOfName.Last, Name = "Picard" }
+                    );
+            });
 
             builder.Entity<CharacterSkill>(cs =>
             {
