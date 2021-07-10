@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Shadowrun\Types\" />
+  </ItemGroup>
+
 </Project>

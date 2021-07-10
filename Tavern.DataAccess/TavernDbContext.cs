@@ -7,7 +7,19 @@ using Tavern.DataAccess.Shadowrun;
 
 namespace Tavern.DataAccess
 {
-    public class TavernDbContext : IdentityDbContext<TavernUser, TavernRole, Guid>
+    public interface ITavernDbContext
+    {
+        DbSet<Alias> Aliases { get; set; }
+        DbSet<Character> Characters { get; set; }
+        DbSet<CharacterSkill> CharacterSkills { get; set; }
+        DbSet<CharacterSkillGroup> CharacterSkillGroups { get; set; }
+        DbSet<Contact> Contacts { get; set; }
+        DbSet<Quality> Qualities { get; set; }
+        DbSet<Skill> Skills { get; set; }
+        DbSet<SkillGroup> SkillGroups { get; set; }
+    }
+
+    public class TavernDbContext : IdentityDbContext<TavernUser, TavernRole, Guid>, ITavernDbContext
     {
         protected TavernDbContext()
         {
@@ -19,14 +31,14 @@ namespace Tavern.DataAccess
 
         #region Tables
         
-        public virtual DbSet<Alias> Alias { get; set; }
-        public virtual DbSet<Character> Character { get; set; }
-        public virtual DbSet<CharacterSkill> CharacterSkill { get; set; }
-        public virtual DbSet<CharacterSkillGroup> CharacterSkillGroup { get; set; }
-        public virtual DbSet<Contact> Contact { get; set; }
-        public virtual DbSet<Quality> Quality { get; set; }
-        public virtual DbSet<Skill> Skill { get; set; }
-        public virtual DbSet<SkillGroup> SkillGroup { get; set; }
+        public virtual DbSet<Alias> Aliases { get; set; }
+        public virtual DbSet<Character> Characters { get; set; }
+        public virtual DbSet<CharacterSkill> CharacterSkills { get; set; }
+        public virtual DbSet<CharacterSkillGroup> CharacterSkillGroups { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Quality> Qualities { get; set; }
+        public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<SkillGroup> SkillGroups { get; set; }
 
         #endregion
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tavern.DataAccess.Shadowrun
 {
     public class Alias
     {
+        [Key]
         public Guid AliasId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
