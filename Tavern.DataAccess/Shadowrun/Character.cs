@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Tavern.DataAccess.Core;
 using Tavern.DataAccess.GameObjects;
 using Tavern.DataAccess.Shadowrun.Attributes;
+using static Tavern.DataAccess.Shadowrun.Attributes.AttributeCategoryAttribute;
 
 namespace Tavern.DataAccess.Shadowrun
 {
@@ -19,25 +20,43 @@ namespace Tavern.DataAccess.Shadowrun
         public int PublicAwareness { get; set; } = 0;
         #endregion
 
+
+        // These have special rules surrounding them in the core rulebook. 
+        //public int PhysicalConditionMonitor { get; set; }
+        //public int StunConditionMonitor { get; set; }
+
         #region Attributes
 
-        [Physical]
+        [AttributeCategory(AttributeCategory.Physical)]
         public int Body { get; set; }
-        [Physical]
+        [AttributeCategory(AttributeCategory.Physical)]
         public int Agility { get; set; }
-        [Physical]
+        [AttributeCategory(AttributeCategory.Physical)]
         public int Reaction { get; set; }
-        [Physical]
+        [AttributeCategory(AttributeCategory.Physical)]
         public int Strength { get; set; }
 
-        [Mental]
+
+        [AttributeCategory(AttributeCategory.Mental)]
         public int Willpower { get; set; }
-        [Mental]
+        [AttributeCategory(AttributeCategory.Mental)]
         public int Logic { get; set; }
-        [Mental]
+        [AttributeCategory(AttributeCategory.Mental)]
         public int Intuition { get; set; }
-        [Mental]
+        [AttributeCategory(AttributeCategory.Mental)]
         public int Charisma { get; set; }
+
+
+        [AttributeCategory(AttributeCategory.Special)]
+        public int Edge { get; set; } // For doing cool shit, regardless of archetype
+        [AttributeCategory(AttributeCategory.Special)]
+        public int Essence { get; set; } // For mages
+        [AttributeCategory(AttributeCategory.Special)]
+        public int Initiative { get; set; } // For combat
+        [AttributeCategory(AttributeCategory.Special)]
+        public int Magic { get; set; } // For mages
+        [AttributeCategory(AttributeCategory.Special)]
+        public int Resonance { get; set; } // For Technomancers
 
         #endregion
 
